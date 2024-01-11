@@ -2,17 +2,22 @@ const searchForm = document.querySelector('form');
 const movieContainer = document.querySelector('.movie-container');
 const inputBox = document.querySelector('.inputBox');
 
-const getMovieInfo = async (movie) => {           // function to fetch movie details
+const getMovieInfo = async (movie) => {           
     const myApiKey = "13457b8a";
-    const url = `http://www.omdbapi.com/?apikey=${myApiKey}&t=${movie}`; 
+    const url = `https://www.omdbapi.com/?apikey=${myApiKey}&t=${movie}`;  // Use "https" instead of "http"
 
-    const response = await fetch(url);       // returns a promise, and we need to convert it to json
-    const data = await response.json();
+    try {
+        const response = await fetch(url);       
+        const data = await response.json();
 
-    console.log(data)
+        console.log(data);
 
-    showMovieData(data);
-}   
+        showMovieData(data);
+    } catch (error) {
+        console.error("Error fetching movie data:", error);
+    }
+}
+ 
 
 function showMovieData(data){       // shows data on screen
 
